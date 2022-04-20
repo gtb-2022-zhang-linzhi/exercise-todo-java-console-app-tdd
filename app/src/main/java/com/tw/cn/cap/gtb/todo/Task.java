@@ -1,15 +1,14 @@
 package com.tw.cn.cap.gtb.todo;
 
 public class Task {
-    private long id;
-    private String name;
+    private final long id;
+    private final String name;
+    private final boolean isCompleted;
 
-    public Task() {
-    }
-
-    public Task(long id, String name) {
+    public Task(long id, String name, boolean isCompleted) {
         this.id = id;
         this.name = name;
+        this.isCompleted = isCompleted;
     }
 
     public long getId() {
@@ -20,15 +19,11 @@ public class Task {
         return name;
     }
 
-    public void setId(long id) {
-        this.id = id;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
     String format() {
         return String.format("%d %s", getId(), getName());
+    }
+
+    public boolean isCompleted() {
+        return this.isCompleted;
     }
 }
