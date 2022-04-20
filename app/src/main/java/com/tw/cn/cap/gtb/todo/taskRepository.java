@@ -5,8 +5,8 @@ import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.List;
 
-public class TaskRepository {
-    public TaskRepository() {
+public class taskRepository {
+    public taskRepository() {
     }
 
     List<Task> loadTasks() {

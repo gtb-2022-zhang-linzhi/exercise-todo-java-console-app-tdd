@@ -5,7 +5,7 @@ import java.util.List;
 
 public class App {
 
-    private final TaskRepository taskRepository = new TaskRepository();
+    private final com.tw.cn.cap.gtb.todo.taskRepository taskRepository = new taskRepository();
 
     public static void main(String[] args) {
         throw new UnsupportedOperationException();
@@ -14,10 +14,19 @@ public class App {
     public List<String> run() {
         final List<Task> tasks = taskRepository.loadTasks();
         final List<String> result = new ArrayList<>();
+
         result.add("# To be done");
-        for (var task: tasks) {
-            result.add(task.format());
-        }
+        tasks.stream()
+                .filter(task -> !task.isCompleted())
+                .map(Task::format)
+                .forEach(result::add);
+
+        result.add("# Completed");
+        tasks.stream()
+                .filter(Task::isCompleted)
+                .map(Task::format)
+                .forEach(result::add);
+
         return result;
     }
 }
