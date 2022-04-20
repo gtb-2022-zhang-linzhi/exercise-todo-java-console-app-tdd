@@ -16,6 +16,9 @@ public record Section(String title, boolean flag) {
         final List<String> result = new ArrayList<>();
         result.add(title());
         tasks.stream().filter(this::isTypeMatched).map(Task::format).forEach(result::add);
+        if (result.size() == 1) {
+            result.add("Empty");
+        }
         return result;
     }
 
