@@ -64,24 +64,6 @@ class AppTest {
                         result);
             }
         }
-
-        @Nested
-        class WhenMultipleWordsProvided {
-            @Test
-            void should_use_all_words_as_name() {
-                app.run("add", "fizz", "buzz");
-                final var result = app.run();
-                Assertions.assertEquals(List.of(
-                                "# To be done",
-                                "1 task 01",
-                                "2 task 02",
-                                "5 fizz buzz",
-                                "# Completed",
-                                "3 task 03",
-                                "4 task 04"),
-                        result);
-            }
-        }
     }
 
     private void writeDataFile(List<String> lines) {
