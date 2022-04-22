@@ -11,6 +11,8 @@ import java.util.List;
 
 class AppTest {
 
+    private App app;
+
     @BeforeEach
     void setUp() {
         writeDataFile(List.of(
@@ -18,6 +20,7 @@ class AppTest {
                 "+ task 02",
                 "x task 03",
                 "x task 04"));
+        app = new App();
     }
 
     @Nested
@@ -26,7 +29,10 @@ class AppTest {
         class WhenThereAreExistingTasks {
             @Test
             void should_list_existing_tasks() {
-                final var result = new App().run();
+                // Given
+                // When
+                final var result = app.run();
+                // Then
                 Assertions.assertEquals(List.of(
                                 "# To be done",
                                 "1 task 01",
@@ -45,9 +51,8 @@ class AppTest {
         class WhenSingleWordProvided {
             @Test
             void should_add_task_with_single_word_as_name() {
-                new App().run("add", "foobar");
-
-                final var result = new App().run();
+                app.run("add", "foobar");
+                final var result = app.run();
                 Assertions.assertEquals(List.of(
                                 "# To be done",
                                 "1 task 01",
