@@ -1,21 +1,24 @@
 package com.tw.cn.cap.gtb.todo;
 
+import java.util.Arrays;
 import java.util.List;
 
 public class AddCommand {
     private final String[] args;
-    final taskRepository taskRepository = new taskRepository();
+    // Dependency Injection (OI)
+    // do not confuse with DIP
 
-    public AddCommand(String[] args) {
+    // DOC: depended on component
+    final taskRepository taskRepository;
+
+    public AddCommand(taskRepository taskRepository, String... args) {
         this.args = args;
-    }
-
-    public String[] getArgs() {
-        return args;
+        this.taskRepository = taskRepository;
     }
 
     List<String> execute() {
-        return taskRepository.create(new Task(0, getArgs()[1], false));
+        final var taskName = String.join(" ", Arrays.copyOfRange(args, 1, args.length));
+        return taskRepository.create(new Task(0, taskName, false));
     }
 
 }
