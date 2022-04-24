@@ -8,18 +8,26 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class taskRepository {
-    public taskRepository() {
-    }
+
+    private final TaskMarshal taskMarshal = new TaskMarshal();
 
     List<Task> loadTasks() {
         final List<String> lines = readTaskLines();
         final List<Task> tasks = new ArrayList<>();
         for (int i = 0; i < lines.size(); i++) {
-            tasks.add(TaskMarshal.unmarshal(i + 1, lines.get(i)));
+            tasks.add(taskMarshal.unmarshal(i + 1, lines.get(i)));
         }
-        return tasks.stream()
-                .filter(task -> !task.isDeleted())
-                .collect(Collectors.toList());
+        return tasks;
+    }
+
+    public void create(Task task) {
+        try (var bw = Files.newBufferedWriter(Constants.TASKS_FILE_PATH, StandardOpenOption.APPEND)) {
+            final String line = taskMarshal.marshal(task);
+            bw.write(line);
+            bw.newLine();
+        } catch (IOException e) {
+            throw new TodoException();
+        }
     }
 
     List<String> readTaskLines() {
@@ -30,28 +38,4 @@ public class taskRepository {
         }
     }
 
-    public void create(Task task) {
-        try (var bw = Files.newBufferedWriter(Constants.TASKS_FILE_PATH, StandardOpenOption.APPEND)) {
-            final String line = TaskMarshal.marshal(task);
-            bw.write(line);
-            bw.newLine();
-        } catch (IOException e) {
-            throw new TodoException();
-        }
-    }
-
-    public void delete(Integer id) {
-        final var tasks = loadTasks();
-        tasks.stream().filter(task -> task.getId() == id).forEach(Task::delete);
-        try (var bw = Files.newBufferedWriter(Constants.TASKS_FILE_PATH)) {
-            for (Task task : tasks) {
-                final var completedSign = task.isCompleted() ? "x " : "+ ";
-                final var deletedSign = task.isDeleted() ? "x " : "+ ";
-                bw.write(completedSign + deletedSign + task.getName());
-                bw.newLine();
-            }
-        } catch (IOException e) {
-            throw new TodoException();
-        }
-    }
 }
