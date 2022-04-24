@@ -24,9 +24,11 @@ class TaskMashalTest {
 
     private static Stream<Arguments> lines_and_tasks() {
         return Stream.of(
-                Arguments.of("+ foobar", new Task(1, "foo", false, false)),
-                Arguments.of("x foobar", new Task(1, "foo", true, false)),
-                Arguments.of("+     foo   bar   ", new Task(1, "    foo   bar   ", false, false))
+                Arguments.of("+ + foobar", new Task(1, "foobar", false, false)),
+                Arguments.of("x + foobar", new Task(1, "foobar", true, false)),
+                Arguments.of("+ x foobar", new Task(1, "foobar", false, true)),
+                Arguments.of("x x foobar", new Task(1, "foobar", true, true)),
+                Arguments.of("+ +     foo   bar   ", new Task(1, "    foo   bar   ", false, false))
         );
     }
 
