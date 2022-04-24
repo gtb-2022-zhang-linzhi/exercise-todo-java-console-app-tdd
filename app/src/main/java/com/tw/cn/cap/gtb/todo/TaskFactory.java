@@ -4,11 +4,14 @@ public class TaskFactory {
     private TaskFactory() {
     }
 
+    static String marshal(Task task) {
+        return "+ " + task.getName();
+    }
+
     static Task createTask(int id, String line) {
-        final var fields = line.split(" ", 3);
-        final var name = fields[2];
+        final var fields = line.split(" ", 2);
+        final var name = fields[1];
         final var isCompleted = fields[0].equals("x");
-        final var isDeleted = fields[1].equals("x");
-        return new Task(id, name, isCompleted, isDeleted);
+        return new Task(id, name, isCompleted);
     }
 }
