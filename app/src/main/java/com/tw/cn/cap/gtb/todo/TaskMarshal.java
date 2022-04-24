@@ -13,6 +13,6 @@ public class TaskMarshal {
         final var fields = line.split(" ", 2);
         final var name = fields[1];
         final var isCompleted = fields[0].equals("x");
-        return new Task(id, name, isCompleted);
+        return new Task(id, name, isCompleted, false);
     }
 }

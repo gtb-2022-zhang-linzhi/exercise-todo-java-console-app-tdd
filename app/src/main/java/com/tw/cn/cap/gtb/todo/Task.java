@@ -8,11 +8,11 @@ public class Task {
     private final boolean isCompleted;
     private boolean deleted;
 
-    public Task(long id, String name, boolean isCompleted) {
+    public Task(long id, String name, boolean isCompleted, boolean isDeleted) {
         this.id = id;
         this.name = name;
         this.isCompleted = isCompleted;
-        deleted = false;
+        this.deleted = isDeleted;
     }
 
     public long getId() {
@@ -41,7 +41,12 @@ public class Task {
 
     @Override
     public String toString() {
-        return id + " " + isCompleted + " " + name;
+        return "Task{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", isCompleted=" + isCompleted +
+                ", deleted=" + deleted +
+                '}';
     }
 
     @Override
@@ -49,11 +54,11 @@ public class Task {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Task task = (Task) o;
-        return id == task.id && isCompleted == task.isCompleted && Objects.equals(name, task.name);
+        return id == task.id && isCompleted == task.isCompleted && deleted == task.deleted && name.equals(task.name);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, isCompleted);
+        return Objects.hash(id, name, isCompleted, deleted);
     }
 }

@@ -21,7 +21,7 @@ class AddCommandTest {
 
         command.execute();
 
-        verify(taskRepository).create(new Task(0, "fizz buzz", false));
+        verify(taskRepository).create(new Task(0, "fizz buzz", false, false));
     }
 
     @Test
@@ -30,7 +30,7 @@ class AddCommandTest {
 
         command.execute();
 
-        verify(taskRepository).create(new Task(0, "", false));
+        verify(taskRepository).create(new Task(0, "", false, false));
     }
 
     private AddCommand createCommandFrom(String... args) {
