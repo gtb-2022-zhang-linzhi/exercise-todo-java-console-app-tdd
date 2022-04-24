@@ -17,7 +17,7 @@ class AddCommandTest {
 
     @Test
     void should_compose_task_name_using_multiple_args() {
-        final AddCommand command = createCommandFrom("add", "fizz", "buzz");
+        final AddCommand command = createCommandFrom("fizz", "buzz");
 
         command.execute();
 
@@ -26,7 +26,7 @@ class AddCommandTest {
 
     @Test
     void should_use_empty_name_when_no_args_provided() {
-        final AddCommand command = createCommandFrom("add");
+        final AddCommand command = createCommandFrom();
 
         command.execute();
 
