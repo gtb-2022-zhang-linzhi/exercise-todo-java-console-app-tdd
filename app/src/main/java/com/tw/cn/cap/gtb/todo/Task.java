@@ -5,13 +5,13 @@ import java.util.Objects;
 public class Task {
     private final long id;
     private final String name;
-    private final boolean isCompleted;
+    private final boolean completed;
     private boolean deleted;
 
     public Task(long id, String name, boolean isCompleted, boolean isDeleted) {
         this.id = id;
         this.name = name;
-        this.isCompleted = isCompleted;
+        this.completed = isCompleted;
         this.deleted = isDeleted;
     }
 
@@ -28,7 +28,7 @@ public class Task {
     }
 
     public boolean isCompleted() {
-        return this.isCompleted;
+        return this.completed;
     }
 
     public void delete() {
@@ -44,7 +44,7 @@ public class Task {
         return "Task{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
-                ", isCompleted=" + isCompleted +
+                ", isCompleted=" + completed +
                 ", deleted=" + deleted +
                 '}';
     }
@@ -54,11 +54,11 @@ public class Task {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Task task = (Task) o;
-        return id == task.id && isCompleted == task.isCompleted && deleted == task.deleted && name.equals(task.name);
+        return id == task.id && completed == task.completed && deleted == task.deleted && name.equals(task.name);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, isCompleted, deleted);
+        return Objects.hash(id, name, completed, deleted);
     }
 }
