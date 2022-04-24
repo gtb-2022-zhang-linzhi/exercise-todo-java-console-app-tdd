@@ -45,9 +45,7 @@ public class taskRepository {
         tasks.stream().filter(task -> task.getId() == id).forEach(Task::delete);
         try (var bw = Files.newBufferedWriter(Constants.TASKS_FILE_PATH)) {
             for (Task task : tasks) {
-                final var completedSign = task.isCompleted() ? "x " : "+ ";
-                final var deletedSign = task.isDeleted() ? "x " : "+ ";
-                bw.write(completedSign + deletedSign + task.getName());
+                bw.write(TaskMarshal.marshal(task));
                 bw.newLine();
             }
         } catch (IOException e) {
