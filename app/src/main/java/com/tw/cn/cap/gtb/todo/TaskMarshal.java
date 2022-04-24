@@ -5,7 +5,8 @@ public class TaskMarshal {
     }
 
     static String marshal(Task task) {
-        return "+ " + task.getName();
+        final var completedSign = task.isCompleted() ? "x": "+";
+        return completedSign + task.getName();
     }
 
     static Task unmarshal(int id, String line) {
