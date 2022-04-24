@@ -6,11 +6,13 @@ public class Task {
     private final long id;
     private final String name;
     private final boolean isCompleted;
+    private boolean deleted;
 
-    public Task(long id, String name, boolean isCompleted) {
+    public Task(long id, String name, boolean isCompleted, boolean deleted) {
         this.id = id;
         this.name = name;
         this.isCompleted = isCompleted;
+        this.deleted = deleted;
     }
 
     public long getId() {
@@ -45,5 +47,13 @@ public class Task {
     @Override
     public int hashCode() {
         return Objects.hash(id, name, isCompleted);
+    }
+
+    public void delete() {
+        this.deleted = true;
+    }
+
+    public boolean isDeleted() {
+        return this.deleted;
     }
 }

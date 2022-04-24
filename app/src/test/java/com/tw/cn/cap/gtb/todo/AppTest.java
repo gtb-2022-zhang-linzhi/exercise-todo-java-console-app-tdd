@@ -16,10 +16,10 @@ class AppTest {
     @BeforeEach
     void setUp() {
         writeDataFile(List.of(
-                "+ task 01",
-                "+ task 02",
-                "x task 03",
-                "x task 04"));
+                "+ + task 01",
+                "+ + task 02",
+                "x + task 03",
+                "x + task 04"));
         app = new App();
     }
 
@@ -62,6 +62,24 @@ class AppTest {
                                 "3 task 03",
                                 "4 task 04"),
                         result);
+            }
+        }
+    }
+
+    @Nested
+    class RemoveTask {
+        @Nested
+        class WhenSingleIdProvided {
+            @Test
+            void should_remove_single_task() {
+                app.run("remove", "1");
+                Assertions.assertEquals(List.of(
+                                "# To be done",
+                                "2 task 02",
+                                "# Completed",
+                                "3 task 03",
+                                "4 task 04"),
+                        app.run());
             }
         }
     }
