@@ -17,7 +17,7 @@ public class AddCommand {
 
     List<String> execute() {
         final var taskName = String.join(" ", args);
-        taskRepository.create(new Task(0, taskName, false, false));
+        taskRepository.create(new Task(0, taskName, false));
         return List.of();
     }
 
