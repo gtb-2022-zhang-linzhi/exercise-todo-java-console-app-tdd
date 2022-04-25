@@ -7,8 +7,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class taskRepository {
-    public taskRepository() {
+public class TaskRepository {
+    public TaskRepository() {
     }
 
     List<Task> loadTasks() {

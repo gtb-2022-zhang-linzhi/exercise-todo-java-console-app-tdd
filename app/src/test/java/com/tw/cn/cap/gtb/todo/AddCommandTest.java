@@ -8,11 +8,11 @@ import static org.mockito.Mockito.verify;
 
 class AddCommandTest {
 
-    private taskRepository taskRepository;
+    private TaskRepository taskRepository;
 
     @BeforeEach
     void setUp() {
-        taskRepository = mock(taskRepository.class);
+        taskRepository = mock(TaskRepository.class);
     }
 
     @Test

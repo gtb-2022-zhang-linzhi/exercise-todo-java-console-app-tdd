@@ -17,10 +17,10 @@ public class App {
         }
         final var resetArgs = Arrays.copyOfRange(args, 1, args.length);
         if (args[0].equals("add")) {
-            return new AddCommand(new taskRepository(), resetArgs).execute();
+            return new AddCommand(new TaskRepository(), resetArgs).execute();
         }
         if (args[0].equals("remove")) {
-            return new RemoveCommand(new taskRepository(), resetArgs).execute();
+            return new RemoveCommand(new TaskRepository(), resetArgs).execute();
         }
         return listCommand.run();
     }

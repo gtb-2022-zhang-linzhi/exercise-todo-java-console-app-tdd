@@ -8,9 +8,9 @@ public class AddCommand {
     // do not confuse with DIP
 
     // DOC: depended on component
-    final taskRepository taskRepository;
+    final TaskRepository taskRepository;
 
-    public AddCommand(taskRepository taskRepository, String... args) {
+    public AddCommand(TaskRepository taskRepository, String... args) {
         this.args = args;
         this.taskRepository = taskRepository;
     }

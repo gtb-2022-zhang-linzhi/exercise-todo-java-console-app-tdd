@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ListCommand {
-    final com.tw.cn.cap.gtb.todo.taskRepository taskRepository = new taskRepository();
+    final TaskRepository taskRepository = new TaskRepository();
 
     List<String> run() {
         final List<Task> tasks = taskRepository.loadTasks();
