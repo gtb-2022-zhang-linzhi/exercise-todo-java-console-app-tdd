@@ -82,6 +82,20 @@ class AppTest {
                         app.run());
             }
         }
+
+        @Nested
+        class WhenMultipleIdsProvided {
+            @Test
+            void should_remove_them_all() {
+                app.run("remove", "1", "3");
+                Assertions.assertEquals(List.of(
+                                "# To be done",
+                                "2 task 02",
+                                "# Completed",
+                                "4 task 04"),
+                        app.run());
+            }
+        }
     }
 
     private void writeDataFile(List<String> lines) {

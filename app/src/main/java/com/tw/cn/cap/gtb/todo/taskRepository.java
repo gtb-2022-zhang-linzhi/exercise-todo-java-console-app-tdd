@@ -12,15 +12,12 @@ public class taskRepository {
     }
 
     List<Task> loadTasks() {
-        final List<String> lines = readTaskLines();
-        final List<Task> tasks = new ArrayList<>();
-        for (int i = 0; i < lines.size(); i++) {
-            tasks.add(TaskMarshal.unmarshal(i + 1, lines.get(i)));
-        }
+        final List<Task> tasks = loadAllTasks();
         return tasks.stream()
                 .filter(task -> !task.isDeleted())
                 .collect(Collectors.toList());
     }
+
 
     List<String> readTaskLines() {
         try {
@@ -41,7 +38,7 @@ public class taskRepository {
     }
 
     public void delete(Integer id) {
-        final var tasks = loadTasks();
+        final var tasks = loadAllTasks();
         tasks.stream().filter(task -> task.getId() == id).forEach(Task::delete);
         try (var bw = Files.newBufferedWriter(Constants.TASKS_FILE_PATH)) {
             for (Task task : tasks) {
@@ -51,5 +48,14 @@ public class taskRepository {
         } catch (IOException e) {
             throw new TodoException();
         }
+    }
+
+    private List<Task> loadAllTasks() {
+        final List<String> lines = readTaskLines();
+        final List<Task> tasks = new ArrayList<>();
+        for (int i = 0; i < lines.size(); i++) {
+            tasks.add(TaskMarshal.unmarshal(i + 1, lines.get(i)));
+        }
+        return tasks;
     }
 }
