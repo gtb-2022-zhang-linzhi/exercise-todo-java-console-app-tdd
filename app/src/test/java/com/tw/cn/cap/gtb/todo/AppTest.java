@@ -29,7 +29,7 @@ class AppTest {
             void should_list_existing_tasks() {
                 // Given
                 // When
-                final var result = app.run();
+                final var result = app.run("list");
                 // Then
                 Assertions.assertEquals(List.of(
                                 "# To be done",
@@ -50,7 +50,7 @@ class AppTest {
             @Test
             void should_add_task_with_single_word_as_name() {
                 app.run("add", "foobar");
-                final var result = app.run();
+                final var result = app.run("list");
                 Assertions.assertEquals(List.of(
                                 "# To be done",
                                 "1 task 01",
@@ -77,7 +77,7 @@ class AppTest {
                                 "# Completed",
                                 "3 task 03",
                                 "4 task 04"),
-                        app.run());
+                        app.run("list"));
             }
         }
 
@@ -91,7 +91,7 @@ class AppTest {
                                 "2 task 02",
                                 "# Completed",
                                 "4 task 04"),
-                        app.run());
+                        app.run("list"));
             }
         }
     }
