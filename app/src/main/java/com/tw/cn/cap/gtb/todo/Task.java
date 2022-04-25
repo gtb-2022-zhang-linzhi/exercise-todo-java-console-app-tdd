@@ -3,19 +3,19 @@ package com.tw.cn.cap.gtb.todo;
 import java.util.Objects;
 
 public class Task {
-    private final long id;
+    private final int id;
     private final String name;
     private final boolean completed;
     private boolean deleted;
 
-    public Task(long id, String name, boolean isCompleted, boolean isDeleted) {
+    public Task(int id, String name, boolean isCompleted, boolean isDeleted) {
         this.id = id;
         this.name = name;
         this.completed = isCompleted;
         this.deleted = isDeleted;
     }
 
-    public long getId() {
+    public int getId() {
         return id;
     }
 
