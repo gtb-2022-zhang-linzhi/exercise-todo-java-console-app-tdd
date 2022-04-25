@@ -11,9 +11,8 @@ public class TaskRepository {
     public TaskRepository() {
     }
 
-    List<Task> loadTasks() {
-        final List<Task> tasks = loadAllTasks();
-        return tasks.stream()
+    List<Task> all() {
+        return loadTasks().stream()
                 .filter(task -> !task.isDeleted())
                 .collect(Collectors.toList());
     }
@@ -38,7 +37,7 @@ public class TaskRepository {
     }
 
     public void delete(Integer id) {
-        final var tasks = loadAllTasks();
+        final var tasks = loadTasks();
         tasks.stream().filter(task -> task.getId() == id).forEach(Task::delete);
         try (var bw = Files.newBufferedWriter(Constants.TASKS_FILE_PATH)) {
             for (Task task : tasks) {
@@ -50,7 +49,7 @@ public class TaskRepository {
         }
     }
 
-    private List<Task> loadAllTasks() {
+    private List<Task> loadTasks() {
         final List<String> lines = readTaskLines();
         final List<Task> tasks = new ArrayList<>();
         for (int i = 0; i < lines.size(); i++) {
