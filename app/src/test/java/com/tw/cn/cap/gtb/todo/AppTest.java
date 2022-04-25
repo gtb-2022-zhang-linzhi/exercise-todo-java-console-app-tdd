@@ -96,4 +96,18 @@ class AppTest {
         }
     }
 
+
+    @Nested
+    class UnknownCommand {
+        @Nested
+        class WhenCommandMeanIsUnknown {
+            @Test
+            void should_give_hint() {
+                final var result = app.run("foobar");
+                Assertions.assertEquals(List.of(
+                                "Unknown command: foobar!"), result);
+            }
+        }
+    }
+
 }
